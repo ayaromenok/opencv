@@ -179,7 +179,8 @@ public:
         UNKNOWN_VENDOR=0,
         VENDOR_AMD=1,
         VENDOR_INTEL=2,
-        VENDOR_NVIDIA=3
+        VENDOR_NVIDIA=3,
+        VENDOR_ARM=4
     };
     CV_WRAP int vendorID() const;
     // FIXIT

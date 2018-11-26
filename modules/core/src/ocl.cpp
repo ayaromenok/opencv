@@ -1254,6 +1254,14 @@ struct Device::Impl
             vendorID_ = VENDOR_INTEL;
         else if (vendorName_ == "NVIDIA Corporation")
             vendorID_ = VENDOR_NVIDIA;
+        else if (vendorName_ == "ARM Platform")
+        {
+            std::cout << "vendor name: " << vendorName_ << std::endl;
+            vendorID_ = VENDOR_ARM;
+            std::cout << "max WG Size by driver: " << maxWorkGroupSize_ << std::endl;
+            maxWorkGroupSize_ = maxWorkGroupSize_/2;
+            std::cout << "max WG Size by test: " << maxWorkGroupSize_ << std::endl;
+        }
         else
             vendorID_ = UNKNOWN_VENDOR;
 
