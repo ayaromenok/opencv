@@ -1254,7 +1254,7 @@ struct Device::Impl
             vendorID_ = VENDOR_INTEL;
         else if (vendorName_ == "NVIDIA Corporation")
             vendorID_ = VENDOR_NVIDIA;
-        else if (vendorName_ == "ARM Platform")
+        else if (vendorName_ == "ARM")
         {
             std::cout << "vendor name: " << vendorName_ << std::endl;
             vendorID_ = VENDOR_ARM;
