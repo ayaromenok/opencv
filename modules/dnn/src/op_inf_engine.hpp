@@ -68,6 +68,8 @@ public:
 
     virtual InferenceEngine::InputInfo::Ptr getInput(const std::string &inputName) const CV_NOEXCEPT;
 
+    virtual InferenceEngine::StatusCode serialize(const std::string &xmlPath, const std::string &binPath, InferenceEngine::ResponseDesc* resp) const CV_NOEXCEPT;
+
     virtual void getName(char *pName, size_t len) CV_NOEXCEPT;
 
     virtual void getName(char *pName, size_t len) const CV_NOEXCEPT;
@@ -134,6 +136,9 @@ private:
     InferenceEngine::InferRequest infRequest;
     // In case of models from Model Optimizer we need to manage their lifetime.
     InferenceEngine::CNNNetwork netOwner;
+    // There is no way to check if netOwner is initialized or not so we use
+    // a separate flag to determine if the model has been loaded from IR.
+    bool hasNetOwner;
 
     std::string name;
 
