@@ -1247,6 +1247,7 @@ struct Device::Impl
         intelSubgroupsSupport_ = isExtensionSupported("cl_intel_subgroups");
 
         vendorName_ = getStrProp(CL_DEVICE_VENDOR);
+
         if (vendorName_ == "Advanced Micro Devices, Inc." ||
             vendorName_ == "AMD")
             vendorID_ = VENDOR_AMD;
@@ -1258,9 +1259,17 @@ struct Device::Impl
         {
             std::cout << "vendor name: " << vendorName_ << std::endl;
             vendorID_ = VENDOR_ARM;
-            std::cout << "max WG Size by driver: " << maxWorkGroupSize_ << std::endl;
-            maxWorkGroupSize_ = maxWorkGroupSize_/2;
-            std::cout << "max WG Size by test: " << maxWorkGroupSize_ << std::endl;
+            if (strstr(name_.c_str(), "Mali-T" ) != 0){
+                std::cout << "ARM Mali Midgard / Txxx: OpenCL workaround required" << std::endl;
+                std::cout << "max WG Size by driver: " << maxWorkGroupSize_ << std::endl;
+                maxWorkGroupSize_ = maxWorkGroupSize_/2;
+                std::cout << "max WG Size by test: " << maxWorkGroupSize_ << std::endl;
+            } else if (strstr(name_.c_str(), "Mali-G" ) != 0){
+                std::cout << "ARM Mali Bifrost / Gxx: *no* OpenCL workaround required" << std::endl;
+            } else {
+                std::cout << "unknown ARM GPU: *no* OpenCL workaround required" << std::endl;
+            }
+            
         }
         else
             vendorID_ = UNKNOWN_VENDOR;
