@@ -1258,21 +1258,23 @@ struct Device::Impl
         else if (vendorName_ == "ARM")
         {
             std::cout << "vendor name: " << vendorName_ << std::endl;
-            vendorID_ = VENDOR_ARM;
+            vendorID_ = VENDOR_ARM;     
             if (strstr(name_.c_str(), "Mali-T" ) != 0){
                 std::cout << "ARM Mali Midgard / Txxx: OpenCL workaround required" << std::endl;
                 std::cout << "max WG Size by driver: " << maxWorkGroupSize_ << std::endl;
+                deviceID_ = DEVICE_ARM_MIDGARD;
                 maxWorkGroupSize_ = maxWorkGroupSize_/2;
                 std::cout << "max WG Size by test: " << maxWorkGroupSize_ << std::endl;
             } else if (strstr(name_.c_str(), "Mali-G" ) != 0){
                 std::cout << "ARM Mali Bifrost / Gxx: *no* OpenCL workaround required" << std::endl;
+                deviceID_ = DEVICE_ARM_BIFROST;
             } else {
                 std::cout << "unknown ARM GPU: *no* OpenCL workaround required" << std::endl;
-            }
-            
+            }    
         }
         else
             vendorID_ = UNKNOWN_VENDOR;
+                
 
 #if 0
         if (isExtensionSupported("cl_khr_spir"))
@@ -1338,6 +1340,7 @@ struct Device::Impl
     String vendorName_;
     int vendorID_;
     bool intelSubgroupsSupport_;
+    int deviceID_;
 
     std::set<std::string> extensions_set_;
 };
@@ -1407,6 +1410,9 @@ String Device::vendorName() const
 
 int Device::vendorID() const
 { return p ? p->vendorID_ : 0; }
+
+int Device::deviceID() const
+{ return p ? p->deviceID_ : 0; }
 
 String Device::OpenCL_C_Version() const
 { return p ? p->getStrProp(CL_DEVICE_OPENCL_C_VERSION) : String(); }

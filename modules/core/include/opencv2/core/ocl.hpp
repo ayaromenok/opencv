@@ -190,8 +190,17 @@ public:
     CV_WRAP inline bool isAMD() const { return vendorID() == VENDOR_AMD; }
     CV_WRAP inline bool isIntel() const { return vendorID() == VENDOR_INTEL; }
     CV_WRAP inline bool isNVidia() const { return vendorID() == VENDOR_NVIDIA; }
-    CV_WRAP inline bool isARM() const { return vendorID() == VENDOR_ARM; }
-
+    CV_WRAP inline bool isArm() const { return vendorID() == VENDOR_ARM; }
+    
+    enum{
+        UNKNOWN_DEVICE=0,
+        DEVICE_ARM_MIDGARD=1,
+        DEVICE_ARM_BIFROST=2
+        };
+    CV_WRAP int deviceID() const;    
+    CV_WRAP inline bool isArmMidgard() const { return deviceID() == DEVICE_ARM_MIDGARD; }
+    CV_WRAP inline bool isArmBifrost() const { return deviceID() == DEVICE_ARM_BIFROST; }
+    
     CV_WRAP int maxClockFrequency() const;
     CV_WRAP int maxComputeUnits() const;
     CV_WRAP int maxConstantArgs() const;
