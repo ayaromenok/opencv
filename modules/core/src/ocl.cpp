@@ -1255,21 +1255,17 @@ struct Device::Impl
             vendorID_ = VENDOR_INTEL;
         else if (vendorName_ == "NVIDIA Corporation")
             vendorID_ = VENDOR_NVIDIA;
-        else if (vendorName_ == "ARM")
-        {
-            std::cout << "vendor name: " << vendorName_ << std::endl;
+        else if (vendorName_ == "ARM") {
             vendorID_ = VENDOR_ARM;     
             if (strstr(name_.c_str(), "Mali-T" ) != 0){
-                std::cout << "ARM Mali Midgard / Txxx: OpenCL workaround required" << std::endl;
-                std::cout << "max WG Size by driver: " << maxWorkGroupSize_ << std::endl;
                 deviceID_ = DEVICE_ARM_MIDGARD;
                 maxWorkGroupSize_ = maxWorkGroupSize_/2;
-                std::cout << "max WG Size by test: " << maxWorkGroupSize_ << std::endl;
+                CV_LOG_INFO(NULL, "ARM Midgard/CL workaround: decrease mamWorkGroupSize by 2");                
             } else if (strstr(name_.c_str(), "Mali-G" ) != 0){
-                std::cout << "ARM Mali Bifrost / Gxx: *no* OpenCL workaround required" << std::endl;
                 deviceID_ = DEVICE_ARM_BIFROST;
+                CV_LOG_INFO(NULL, "ARM Bifrost");                
             } else {
-                std::cout << "unknown ARM GPU: *no* OpenCL workaround required" << std::endl;
+                deviceID_ = UNKNOWN_DEVICE;
             }    
         }
         else
