@@ -190,6 +190,7 @@ public:
     CV_WRAP inline bool isAMD() const { return vendorID() == VENDOR_AMD; }
     CV_WRAP inline bool isIntel() const { return vendorID() == VENDOR_INTEL; }
     CV_WRAP inline bool isNVidia() const { return vendorID() == VENDOR_NVIDIA; }
+    CV_WRAP inline bool isARM() const { return vendorID() == VENDOR_ARM; }
 
     CV_WRAP int maxClockFrequency() const;
     CV_WRAP int maxComputeUnits() const;
