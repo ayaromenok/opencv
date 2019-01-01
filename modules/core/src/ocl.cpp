@@ -1257,7 +1257,7 @@ struct Device::Impl
             vendorID_ = VENDOR_NVIDIA;
         else if (vendorName_ == "ARM")
         {
-            vendorID_ = VENDOR_ARM;     
+            vendorID_ = VENDOR_ARM;
             if (strstr(name_.c_str(), "Mali-T" ) != 0)
             {
                 deviceID_ = DEVICE_ARM_MIDGARD;
@@ -1274,7 +1274,6 @@ struct Device::Impl
         }
         else
             vendorID_ = UNKNOWN_VENDOR;
-                
 
         const size_t CV_OPENCL_DEVICE_MAX_WORK_GROUP_SIZE = utils::getConfigurationParameterSizeT("OPENCV_OPENCL_DEVICE_MAX_WORK_GROUP_SIZE", 0);
         if (CV_OPENCL_DEVICE_MAX_WORK_GROUP_SIZE > 0)
