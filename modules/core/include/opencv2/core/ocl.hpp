@@ -192,11 +192,12 @@ public:
     CV_WRAP inline bool isNVidia() const { return vendorID() == VENDOR_NVIDIA; }
     CV_WRAP inline bool isArm() const { return vendorID() == VENDOR_ARM; }
     
-    enum{
+    enum
+    {
         UNKNOWN_DEVICE=0,
         DEVICE_ARM_MIDGARD=1,
         DEVICE_ARM_BIFROST=2
-        };
+    };
     CV_WRAP int deviceID() const;    
     CV_WRAP inline bool isArmMidgard() const { return deviceID() == DEVICE_ARM_MIDGARD; }
     CV_WRAP inline bool isArmBifrost() const { return deviceID() == DEVICE_ARM_BIFROST; }

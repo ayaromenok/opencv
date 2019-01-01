@@ -1255,18 +1255,22 @@ struct Device::Impl
             vendorID_ = VENDOR_INTEL;
         else if (vendorName_ == "NVIDIA Corporation")
             vendorID_ = VENDOR_NVIDIA;
-        else if (vendorName_ == "ARM") {
+        else if (vendorName_ == "ARM")
+        {
             vendorID_ = VENDOR_ARM;     
-            if (strstr(name_.c_str(), "Mali-T" ) != 0){
+            if (strstr(name_.c_str(), "Mali-T" ) != 0)
+            {
                 deviceID_ = DEVICE_ARM_MIDGARD;
                 maxWorkGroupSize_ = maxWorkGroupSize_/2;
-                CV_LOG_INFO(NULL, "ARM Midgard/CL workaround: decrease mamWorkGroupSize by 2");                
-            } else if (strstr(name_.c_str(), "Mali-G" ) != 0){
+                CV_LOG_INFO(NULL, "ARM Midgard/CL workaround: decrease mamWorkGroupSize by 2");
+            } else if (strstr(name_.c_str(), "Mali-G" ) != 0)
+            {
                 deviceID_ = DEVICE_ARM_BIFROST;
-                CV_LOG_INFO(NULL, "ARM Bifrost");                
-            } else {
+                CV_LOG_INFO(NULL, "ARM Bifrost");
+            } else 
+            {
                 deviceID_ = UNKNOWN_DEVICE;
-            }    
+            }
         }
         else
             vendorID_ = UNKNOWN_VENDOR;
