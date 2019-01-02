@@ -3518,7 +3518,7 @@ static bool ocl_sepRowFilter2D(const UMat & src, UMat & buf, const Mat & kernelX
     src.locateROI(srcWholeSize, srcOffset);
 
     String kernelName("row_filter");
-    if (fast8uc1)
+    if (fast8uc1 & !ocl::Device::getDefault().isArmMidgard())
         kernelName += "_C1_D0";
 
     ocl::Kernel k(kernelName.c_str(), cv::ocl::imgproc::filterSepRow_oclsrc,
