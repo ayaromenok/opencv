@@ -347,7 +347,8 @@ static bool extractCovData(InputArray _src, UMat & Dx, UMat & Dy, int depth,
     const int sobel_lsz = 16;
     if ((aperture_size == 3 || aperture_size == 5 || aperture_size == 7 || aperture_size == -1) &&
         wholeSize.height > sobel_lsz + (aperture_size >> 1) &&
-        wholeSize.width > sobel_lsz + (aperture_size >> 1))
+        wholeSize.width > sobel_lsz + (aperture_size >> 1) &&
+        !ocl::Device::getDefault().isArmMidgard())
     {
         CV_Assert(depth == CV_8U || depth == CV_32F);
 
